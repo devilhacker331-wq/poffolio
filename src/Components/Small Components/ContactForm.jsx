@@ -99,7 +99,19 @@ function ContactForm() {
           clearInterval(progressInterval);
           setProgress(100);
           setLoader(false);
-          setIsSent("Failed to send message. Please try again or contact me directly.");
+          
+          // Handle specific EmailJS errors
+          let errorMessage = "Failed to send message. Please try again or contact me directly.";
+          
+          if (error.status === 422 && error.text?.includes("recipients address is empty")) {
+            errorMessage = "Email service is temporarily unavailable. Please contact me directly at paulankita614@gmail.com";
+          } else if (error.status === 400) {
+            errorMessage = "Invalid form data. Please check your inputs and try again.";
+          } else if (error.status === 401) {
+            errorMessage = "Email service authentication failed. Please contact me directly.";
+          }
+          
+          setIsSent(errorMessage);
           console.error("EmailJS Error:", error);
           
           // Clear error message after 5 seconds
