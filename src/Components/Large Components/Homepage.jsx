@@ -452,15 +452,42 @@ function Homepage() {
       </section>
 
       <section>
-        <p className="text-xl font-inter antialiased text-center mb-4">
-          30+ technologies. Just ask.
-        </p>
+        <motion.div 
+          className="text-center mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold mb-2"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <span className={`${mode ? 'text-white' : 'text-gray-900'}`}>30+</span>
+            <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text ml-2">
+              Technologies
+            </span>
+          </motion.h2>
+          <motion.p 
+            className={`text-lg ${mode ? 'text-gray-400' : 'text-gray-600'} font-medium`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Just ask, and I'll make it happen ✨
+          </motion.p>
+        </motion.div>
         <Marquee
           gradient={true}
           gradientColor={mode ? "black" : "white"}
-          gradientWidth={10}
-          speed={25}
+          gradientWidth={50}
+          speed={20}
           pauseOnHover={true}
+          className="py-4"
         >
           <TechStack obj={obj} />
         </Marquee>
